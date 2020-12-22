@@ -9,7 +9,7 @@ import {
   BottomEdgeDown,
   BottomEdgeUp,
   Artist,
-} from "./pageStyles/pageStyles"
+} from "../pageStyles/pageStyles"
 import { COLORS } from "../constants"
 
 const IndexPage = () => {
@@ -34,6 +34,7 @@ const IndexPage = () => {
             homePageHeaderDescription
             homePageHeaderTitle
             homePageHeaderPicture {
+              altText
               sourceUrl
               imageFile {
                 childImageSharp {
@@ -45,7 +46,7 @@ const IndexPage = () => {
             }
             homePageFeaturedArtists {
               ... on WPGraphql_Artist {
-                id
+                slug
                 artist {
                   artistName
                   firstName
@@ -55,7 +56,7 @@ const IndexPage = () => {
                     sourceUrl
                     imageFile {
                       childImageSharp {
-                        fluid(quality: 100, grayscale: true) {
+                        fluid(quality: 50, grayscale: true) {
                           ...GatsbyImageSharpFluid_withWebp
                         }
                       }
@@ -90,13 +91,13 @@ const IndexPage = () => {
           <BottomEdgeUp color={COLORS.PRIMARY} />
         </div>
         <div className="artists">
-          <h2> Featured Artists</h2>
+          <h2>Featured Artists</h2>
           <div className="artist-items">
             {homePageFeaturedArtists.map(({ artist, slug }) => (
-              <Artist to={`/${slug}`}>
+              <Artist key={slug} to={`/${slug}`}>
                 <Image
                   fluid={artist.profile.imageFile.childImageSharp.fluid}
-                  altText={artist.profile.altText}
+                  alt={artist.profile.altText}
                 />
                 <div className="artist-info">
                   <p>

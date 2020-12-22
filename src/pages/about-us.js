@@ -8,7 +8,7 @@ import {
   Image,
   BottomEdgeDown,
   BottomEdgeUp,
-} from "../pages/pageStyles/pageStyles"
+} from "../pageStyles/pageStyles"
 import { COLORS } from "../constants"
 
 const AboutUsPage = () => {
